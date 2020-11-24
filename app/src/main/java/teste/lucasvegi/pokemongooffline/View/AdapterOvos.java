@@ -66,7 +66,7 @@ public class AdapterOvos extends BaseAdapter {
 
 
             if(ovos.get(position).getIncubado() == 1) {
-                kmAndou.setText("0" + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
+                kmAndou.setText(ovos.get(position).getKmAndado() + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
                 Log.i("OVOS", "Entrou no if " + ovos.get(position).getIdOvo());
                 imagem.setImageResource(ovos.get(position).getFotoIncubado());
                 incubar.setEnabled(false);

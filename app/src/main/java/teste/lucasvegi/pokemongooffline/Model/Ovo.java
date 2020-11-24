@@ -2,6 +2,7 @@ package teste.lucasvegi.pokemongooffline.Model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.location.Location;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class Ovo implements Serializable {
     private int Foto;
     private int FotoInc;
     private int Km;
+    private double KmAndado = 0;
+    Location localizacao;
 
     public Ovo(int idOvo, int idPokemon, String idTipoOvo, int incubado) {
         this.idOvo = idOvo;
@@ -58,6 +61,13 @@ public class Ovo implements Serializable {
         c.close();
         return Km;
     }
+
+    public Location getLocalizacao(){
+        return localizacao;
+    }
+    public double getKmAndado(){
+        return KmAndado;
+    }
     public void setIdOvo(int idOvo) {
         this.idOvo = idOvo;
     }
@@ -74,5 +84,11 @@ public class Ovo implements Serializable {
         Log.i("OVOS", "idOvo: " + idOvo);
         BancoDadosSingleton.getInstance().atualizar("ovo",valores,"idOvo = '"+idOvo+"'");
         this.incubado = inc;
+    }
+    public void setLocalizacao(Location localizacao){
+        this.localizacao = localizacao;
+    }
+    public void setKmAndado(double KmAndado){
+        this.KmAndado = KmAndado;
     }
 }
