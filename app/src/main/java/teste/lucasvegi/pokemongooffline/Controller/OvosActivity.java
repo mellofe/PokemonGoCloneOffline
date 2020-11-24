@@ -45,11 +45,6 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
         TextView txtTotal = (TextView) findViewById(R.id.txtOvosTotal);
         int total = ControladoraFachadaSingleton.getInstance().getOvos().size();
         txtTotal.setText("Ovos: " + total + "/9");
-        Location inicial = new Location("");
-        inicial.setLatitude(-20.765829);
-        inicial.setLongitude(-42.882227);
-
-
         //Location Manager
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
@@ -69,10 +64,12 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
         }
 
 
-
+        Location inicial = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         ovos = ControladoraFachadaSingleton.getInstance().getOvos();
         ListView listView = (ListView) findViewById(R.id.listaOvos);
-        ovos.get(0).setLocalizacao(inicial);
+        for(int i=0; i<ovos.size(); i++) {
+            ovos.get(i).setLocalizacao(inicial);
+        }
         AdapterOvos adapterOvos = new AdapterOvos(ovos, this);
         listView.setAdapter(adapterOvos);
         listView.setOnItemClickListener(this);
@@ -111,12 +108,15 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onLocationChanged(Location location) {
         if(location != null){
-            if(location!= ovos.get(0).getLocalizacao() && ovos.get(0).getIncubado()==1){
-                double distancia = location.distanceTo(ovos.get(0).getLocalizacao())/1000;
-                ovos.get(0).setKmAndado(ovos.get(0).getKmAndado()+distancia);
-                ovos.get(0).setLocalizacao(location);
-                Toast.makeText(this, "Distancia Calculada: " + distancia +
-                                    "\nKm Andado: " + ovos.get(0).getKmAndado(), Toast.LENGTH_LONG).show();
+            for(int i=0; i<ovos.size(); i++) {
+                if (location != ovos.get(i).getLocalizacao() && ovos.get(i).getIncubado() == 1) {
+                    double distancia = location.distanceTo(ovos.get(i).getLocalizacao()) / 1000;
+                    ovos.get(i).setKmAndado(ovos.get(i).getKmAndado() + distancia);
+                    ovos.get(i).setLocalizacao(location);
+                    //Toast.makeText(this, "Distancia Calculada: " + distancia +
+                           // "\nKm Andado: " + ovos.get(i).getKmAndado(), Toast.LENGTH_LONG).show();
+                   // AdapterOvos.refreshDrawableState(i);
+                }
             }
         }
 

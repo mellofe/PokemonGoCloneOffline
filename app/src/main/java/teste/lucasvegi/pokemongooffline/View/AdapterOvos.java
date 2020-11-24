@@ -66,7 +66,7 @@ public class AdapterOvos extends BaseAdapter {
 
 
             if(ovos.get(position).getIncubado() == 1) {
-                kmAndou.setText(ovos.get(position).getKmAndado() + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
+                kmAndou.setText(String.format("%.2f", ovos.get(position).getKmAndado()) + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
                 Log.i("OVOS", "Entrou no if " + ovos.get(position).getIdOvo());
                 imagem.setImageResource(ovos.get(position).getFotoIncubado());
                 incubar.setEnabled(false);
@@ -94,5 +94,10 @@ public class AdapterOvos extends BaseAdapter {
             return null;
         }
     }
-
+    /*public void refreshDrawableState (final int position) {
+        super.refreshDrawableState();
+        if(ovos.get(position).getIncubado() == 1) {
+            kmAndou.setText(String.format("%.2f", ovos.get(position).getKmAndado()) + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
+        }
+    }*/
 }
