@@ -73,6 +73,7 @@ public class MapActivity extends FragmentActivity implements LocationListener, G
 
     MediaPlayer mp; //música do mapa
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
