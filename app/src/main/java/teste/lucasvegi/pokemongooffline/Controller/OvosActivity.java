@@ -45,6 +45,7 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
         TextView txtTotal = (TextView) findViewById(R.id.txtOvosTotal);
         int total = ControladoraFachadaSingleton.getInstance().getOvos().size();
         txtTotal.setText("Ovos: " + total + "/9");
+
         //Location Manager
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
@@ -69,6 +70,8 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
         ListView listView = (ListView) findViewById(R.id.listaOvos);
         for(int i=0; i<ovos.size(); i++) {
             ovos.get(i).setLocalizacao(inicial);
+
+
         }
         AdapterOvos adapterOvos = new AdapterOvos(ovos, this);
         listView.setAdapter(adapterOvos);
@@ -116,6 +119,15 @@ public class OvosActivity extends Activity implements AdapterView.OnItemClickLis
                     //Toast.makeText(this, "Distancia Calculada: " + distancia +
                            // "\nKm Andado: " + ovos.get(i).getKmAndado(), Toast.LENGTH_LONG).show();
                    // AdapterOvos.refreshDrawableState(i);
+                }
+                //testa se ovo chocou
+                if(ovos.get(i).getKmAndado() >= ovos.get(i).getKm()){
+                    ovos.get(i).setChocado(1);
+                    ControladoraFachadaSingleton.getInstance().setChocado(ovos.get(i).getIdOvo(),1);
+                    Toast.makeText(this, "Chocou um  " + ControladoraFachadaSingleton.getInstance().getPokemonOvo(ovos.get(i).getIdOvo()),Toast.LENGTH_LONG).show();
+                    //remove da lista de ovos
+                    Ovo o = ovos.get(i);
+                    ovos.remove(o);
                 }
             }
         }

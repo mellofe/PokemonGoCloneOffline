@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import teste.lucasvegi.pokemongooffline.Model.ControladoraFachadaSingleton;
 import teste.lucasvegi.pokemongooffline.Model.Ovo;
 import teste.lucasvegi.pokemongooffline.R;
 import teste.lucasvegi.pokemongooffline.Util.BancoDadosSingleton;
@@ -84,6 +85,7 @@ public class AdapterOvos extends BaseAdapter {
                             kmAndou.setText("0" + "/" + String.valueOf(ovos.get(position).getKm()) + "km");
                             Log.i("OVOS", "Incubar ovo: " + ovos.get(position).getIdOvo());
                             ovos.get(position).setIncubado(1);
+                            ControladoraFachadaSingleton.getInstance().setIncubado(ovos.get(position).getIdOvo(),1);
                         }
                     });
             }

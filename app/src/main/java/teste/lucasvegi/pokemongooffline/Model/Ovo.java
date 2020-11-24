@@ -14,17 +14,21 @@ public class Ovo implements Serializable {
     private int idPokemon;
     private String idTipoOvo;
     private int incubado;
+    private int chocado;
+    private int exibido;
     private int Foto;
     private int FotoInc;
     private int Km;
     private double KmAndado = 0;
     Location localizacao;
 
-    public Ovo(int idOvo, int idPokemon, String idTipoOvo, int incubado) {
+    public Ovo(int idOvo, int idPokemon, String idTipoOvo, int incubado, int chocado, int exibido) {
         this.idOvo = idOvo;
         this.idPokemon = idPokemon;
         this.idTipoOvo = idTipoOvo;
         this.incubado = incubado;
+        this.chocado = chocado;
+        this.exibido = exibido;
     }
 
     public int getIdOvo(){ return idOvo; }
@@ -90,5 +94,21 @@ public class Ovo implements Serializable {
     }
     public void setKmAndado(double KmAndado){
         this.KmAndado = KmAndado;
+    }
+
+    public int getChocado() {
+        return chocado;
+    }
+
+    public void setChocado(int chocado){
+        this.chocado = chocado;
+    }
+
+    public int getExibido() {
+        return exibido;
+    }
+
+    public void setExibido(int exibido) {
+        this.exibido = exibido;
     }
 }
